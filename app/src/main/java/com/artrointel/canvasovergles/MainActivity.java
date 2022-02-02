@@ -2,8 +2,12 @@ package com.artrointel.canvasovergles;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.TextView;
 
 import com.artrointel.canvasovergles.R;
@@ -21,13 +25,14 @@ public class MainActivity extends AppCompatActivity {
 
         mCOGView = findViewById(R.id.cogview);
 
-        final TextView textView = new TextView(getApplicationContext());
-        textView.layout(0, 0, 200, 200);
-        textView.setText("Canvas Over GLES");
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View view = inflater.inflate(R.layout.image, null);
+        view.layout(0, 0, 1000, 1000);
+
         mCOGView.setCanvasDrawingListener(new COGSurfaceRenderer.CanvasDrawingListener() {
             @Override
             public void onDraw(Canvas canvas) {
-                textView.draw(canvas);
+                view.draw(canvas);
             }
         });
 

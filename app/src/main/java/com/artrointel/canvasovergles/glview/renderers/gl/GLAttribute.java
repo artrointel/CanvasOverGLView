@@ -17,7 +17,7 @@ public class GLAttribute implements IGLBindable {
                 -1.f, 1.f,
                 1.f, -1.f,
                 1.f,  1.f
-        };
+        }; // TODO Something looks wrong. debug it with renderdoc.
 
         final float QUAD_UV[] = {
                 0.0f, 0.0f,

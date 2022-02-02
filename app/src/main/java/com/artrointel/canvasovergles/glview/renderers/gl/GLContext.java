@@ -8,6 +8,7 @@ import org.junit.Assert;
 
 public class GLContext {
     public static final String LOG_TAG = "GLContext";
+    // TODO make nonstatic
     private static GLContext sContext;
 
     private static Thread sGLThread;
@@ -32,7 +33,7 @@ public class GLContext {
         GLES30.glViewport(0, 0, width, height);
     }
 
-    protected final void checkGLError() {
+    public static final void checkGLError() {
         Assert.assertTrue("Invalid GL Thread!", Thread.currentThread() == sGLThread);
         int error = 0;
         while((error = GLES30.glGetError()) != GLES30.GL_NO_ERROR) {

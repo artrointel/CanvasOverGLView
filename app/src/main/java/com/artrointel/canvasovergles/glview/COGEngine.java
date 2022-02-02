@@ -2,7 +2,7 @@ package com.artrointel.canvasovergles.glview;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.os.Handler;
+import android.util.Log;
 
 import com.artrointel.canvasovergles.glview.renderers.CanvasRenderer;
 import com.artrointel.canvasovergles.glview.renderers.gl.GLContext;

@@ -5,6 +5,7 @@ import android.opengl.GLES30;
 
 import com.artrointel.canvasovergles.R;
 import com.artrointel.canvasovergles.glview.renderers.gl.GLAttribute;
+import com.artrointel.canvasovergles.glview.renderers.gl.GLContext;
 import com.artrointel.canvasovergles.glview.renderers.gl.GLProgram;
 import com.artrointel.canvasovergles.glview.renderers.gl.GLTextureExt;
 import com.artrointel.canvasovergles.glview.renderers.gl.GLTextureSet;
@@ -15,7 +16,7 @@ public class CanvasRenderer implements Renderer {
 
     GLProgram mProgram;
     GLAttribute mPosition;
-    GLAttribute mUV;
+    GLAttribute mTexCoord;
     GLUniform mColor;
     GLTextureExt mTextureExt;
     GLTextureSet mTextures;
@@ -30,10 +31,10 @@ public class CanvasRenderer implements Renderer {
                 ResourceUtils.ReadStringFromResource(R.raw.ftexturing));
         mProgram.useProgram();
 
-        mPosition = new GLAttribute(GLAttribute.TYPE.VEC2, "aPos", GLAttribute.BUFFER_POSITION_QUAD);
-        mUV = new GLAttribute(GLAttribute.TYPE.VEC2, "aUV", GLAttribute.BUFFER_UV_QUAD);
-
+        mPosition = new GLAttribute(GLAttribute.TYPE.VEC2, "aPos", GLAttribute.BUFFER_UV_QUAD);
+        mTexCoord = new GLAttribute(GLAttribute.TYPE.VEC2, "aTexCoord", GLAttribute.BUFFER_UV_QUAD);
         mTextureExt = new GLTextureExt(canvasWidth, canvasHeight);
+        mTextures = new GLTextureSet();
         mTextures.add(mTextureExt);
 
         mColor = new GLUniform(GLUniform.TYPE.VEC4, "uColor", COLOR_WHITE);
@@ -43,12 +44,14 @@ public class CanvasRenderer implements Renderer {
     public void render() {
         mProgram.useProgram();
 
+        // TODO add bindable object
         mPosition.bind();
-        mUV.bind();
+        mTexCoord.bind();
         mColor.bind();
         mTextures.bind();
 
-        GLES30.glClear(GLES30.GL_COLOR_BUFFER_BIT);
+        GLES30.glClearColor(.3f, .3f, .3f, 1.0f);
+        //GLES30.glClear(GLES30.GL_COLOR_BUFFER_BIT);
         GLES30.glDrawArrays(GLES30.GL_TRIANGLE_STRIP, 0, 4);
     }
 

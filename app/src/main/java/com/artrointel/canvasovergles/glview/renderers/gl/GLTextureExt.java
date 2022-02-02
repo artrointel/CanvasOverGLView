@@ -26,7 +26,8 @@ public class GLTextureExt extends GLTexture {
     }
 
     public Canvas lockCanvas() {
-        return mSurface.lockHardwareCanvas();
+        mCanvas = mSurface.lockHardwareCanvas();
+        return mCanvas;
     }
 
 }

@@ -5,7 +5,7 @@ import android.opengl.GLES30;
 import java.util.ArrayList;
 
 public class GLTextureSet implements IGLBindable {
-    private ArrayList<GLTexture> mTextures;
+    private ArrayList<GLTexture> mTextures= new ArrayList<>();
 
     public void add(GLTexture texture) {
         mTextures.add(texture);
