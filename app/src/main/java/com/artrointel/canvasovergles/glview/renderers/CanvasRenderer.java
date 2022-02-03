@@ -33,8 +33,9 @@ public class CanvasRenderer implements Renderer {
 
         mPosition = new GLAttribute(GLAttribute.TYPE.VEC2, "aPos", GLAttribute.BUFFER_UV_QUAD);
         mTexCoord = new GLAttribute(GLAttribute.TYPE.VEC2, "aTexCoord", GLAttribute.BUFFER_UV_QUAD);
-        mTextureExt = new GLTextureExt(canvasWidth, canvasHeight);
+        mTextureExt = new GLTextureExt(canvasWidth, canvasHeight, "uTexture");
         mTextures = new GLTextureSet();
+        mTextures.setProgramToBind(mProgram);
         mTextures.add(mTextureExt);
 
         mColor = new GLUniform(GLUniform.TYPE.VEC4, "uColor", COLOR_WHITE);
@@ -44,14 +45,14 @@ public class CanvasRenderer implements Renderer {
     public void render() {
         mProgram.useProgram();
 
-        // TODO add bindable object
+        // TODO add bindable object interface
         mPosition.bind();
         mTexCoord.bind();
         mColor.bind();
         mTextures.bind();
 
         GLES30.glClearColor(.3f, .3f, .3f, 1.0f);
-        //GLES30.glClear(GLES30.GL_COLOR_BUFFER_BIT);
+        GLES30.glClear(GLES30.GL_COLOR_BUFFER_BIT);
         GLES30.glDrawArrays(GLES30.GL_TRIANGLE_STRIP, 0, 4);
     }
 
