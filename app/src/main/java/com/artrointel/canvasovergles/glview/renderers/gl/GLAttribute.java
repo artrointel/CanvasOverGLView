@@ -9,15 +9,23 @@ import java.nio.FloatBuffer;
 
 public class GLAttribute implements IGLBindable {
     public static final FloatBuffer BUFFER_POSITION_QUAD;
+    public static final FloatBuffer BUFFER_POSITION_QUAD_FLIP;
     public static final FloatBuffer BUFFER_UV_QUAD;
 
     static {
         final float QUAD_POSITION[] = {
-                -1.f -1.f,
+                -1.f, -1.f,
                 -1.f, 1.f,
                 1.f, -1.f,
                 1.f,  1.f
-        }; // TODO Something looks wrong. debug it with renderdoc.
+        };
+
+        final float QUAD_POSITION_FLIP[] = {
+                -1.f, 1.f,
+                -1.f, -1.f,
+                1.f,  1.f,
+                1.f, -1.f
+        };
 
         final float QUAD_UV[] = {
                 0.0f, 0.0f,
@@ -27,6 +35,7 @@ public class GLAttribute implements IGLBindable {
         };
 
         BUFFER_POSITION_QUAD = DirectBuffer.AllocateFloatBuffer(QUAD_POSITION);
+        BUFFER_POSITION_QUAD_FLIP = DirectBuffer.AllocateFloatBuffer(QUAD_POSITION_FLIP);
         BUFFER_UV_QUAD =  DirectBuffer.AllocateFloatBuffer(QUAD_UV);
     }
 
@@ -68,6 +77,6 @@ public class GLAttribute implements IGLBindable {
     @Override
     public void bind() {
         GLES30.glEnableVertexAttribArray(mLocation);
-        GLES30.glVertexAttribPointer(mLocation, mSizeByType, GLES30.GL_FLOAT, false, 4 * mSizeByType, mData);
+        GLES30.glVertexAttribPointer(mLocation, mSizeByType, GLES30.GL_FLOAT, false, 0, mData);
     }
 }

@@ -3,8 +3,11 @@ package com.artrointel.canvasovergles.glview.renderers.gl;
 import android.graphics.Canvas;
 import android.graphics.SurfaceTexture;
 import android.opengl.GLES11Ext;
+import android.util.Log;
 import android.view.Surface;
 import android.view.TextureView;
+
+import com.artrointel.canvasovergles.glview.utils.GLEventHandler;
 
 public class GLTextureExt extends GLTexture {
 
@@ -35,8 +38,13 @@ public class GLTextureExt extends GLTexture {
                 @Override
                 public void onFrameAvailable(SurfaceTexture surfaceTexture) {
                     // TODO make it work in gl thread event. SurfaceView.queueEvent
-                    //if(!surfaceTexture.isReleased())
-                    //    surfaceTexture.updateTexImage();
+                    if(!surfaceTexture.isReleased())
+                    {
+                        new GLEventHandler().queueEvent(() -> {
+                            surfaceTexture.updateTexImage();
+                        });
+                    }
+
                 }
             };
             mSurfaceTexture.setOnFrameAvailableListener(mSurfaceTextureListener);

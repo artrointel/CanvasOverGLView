@@ -22,7 +22,7 @@ public class CanvasRenderer implements Renderer {
     GLTextureSet mTextures;
 
     public static Float COLOR_WHITE[] = {
-            1.0f, 0.0f, 0.0f, 1.0f
+            1.0f, 1.0f, 1.0f, 1.0f
     };
 
     public CanvasRenderer(int canvasWidth, int canvasHeight) {
@@ -31,7 +31,7 @@ public class CanvasRenderer implements Renderer {
                 ResourceUtils.ReadStringFromResource(R.raw.ftexturing));
         mProgram.useProgram();
 
-        mPosition = new GLAttribute(GLAttribute.TYPE.VEC2, "aPos", GLAttribute.BUFFER_UV_QUAD);
+        mPosition = new GLAttribute(GLAttribute.TYPE.VEC2, "aPos", GLAttribute.BUFFER_POSITION_QUAD_FLIP);
         mTexCoord = new GLAttribute(GLAttribute.TYPE.VEC2, "aTexCoord", GLAttribute.BUFFER_UV_QUAD);
         mTextureExt = new GLTextureExt(canvasWidth, canvasHeight, "uTexture");
         mTextures = new GLTextureSet();

@@ -6,6 +6,8 @@ import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.View;
 
+import com.artrointel.canvasovergles.glview.utils.GLEventHandler;
+
 public class COGSurfaceView extends GLSurfaceView {
 
     public COGSurfaceRenderer mRenderer;
@@ -22,6 +24,8 @@ public class COGSurfaceView extends GLSurfaceView {
     }
 
     private void initialize(final Context context) {
+        // TODO
+        GLEventHandler.sView = this;
 
         setEGLContextClientVersion(3);
         addOnLayoutChangeListener(new OnLayoutChangeListener() {

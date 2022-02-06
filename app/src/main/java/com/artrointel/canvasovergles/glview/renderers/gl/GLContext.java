@@ -2,6 +2,7 @@ package com.artrointel.canvasovergles.glview.renderers.gl;
 
 import android.graphics.Point;
 import android.opengl.GLES30;
+import android.opengl.GLSurfaceView;
 import android.util.Log;
 
 import org.junit.Assert;
@@ -11,7 +12,7 @@ public class GLContext {
     // TODO make nonstatic
     private static GLContext sContext;
 
-    private static Thread sGLThread;
+    private static Thread sGLThread; // TODO make getGLThread and singleton
     private static GLProgram sCurrentProgram;
 
     private static Point mViewPort = new Point();
